@@ -48,11 +48,15 @@ int main()
             case 1:
                 system("cls");
                 
-                enter_value(name, "Please enter the name of the task:\n");
+                enter_value(name, "Please enter the name of the task:");
+                
 
                 enter_value(priority,"Please enter the priority:");
 
                 add_task(homeworks, name, priority);
+
+                puts("task added succesfully");
+
                 break;
             case 2:
                 //calls establish_preference()

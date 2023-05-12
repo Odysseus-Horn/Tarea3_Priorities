@@ -12,10 +12,10 @@ void show_menu()
     puts("| ingrese una opcion:                               |");
     puts("|                                                   |");
     puts("| 1) Agregar tarea.                                 |");
-    puts("| 2) Establecer precedencia entre tareas            |"); 
+    puts("| 2) Establecer precedencia entre tareas.           |"); 
     puts("| 3) Mostrar tareas por hacer.                      |");
-    puts("| 4) marcar tarea como completada                   |");
-    puts("| 5) Salir                                          |");
+    puts("| 4) marcar tarea como completada.                  |");
+    puts("| 5) Salir.                                         |");
     puts(" ---------------------------------------------------");
 }
 
