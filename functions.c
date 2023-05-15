@@ -62,13 +62,28 @@ void add_task(TreeMap* map, char *task_name, char* priority)
     return;
 }
 
-void establish_precedence(TreeMap* map, char *task_name)
+void establish_precedence(TreeMap* map, char *task_name, char* precedence)
 {   
 
-    //debemos verificar si la tarea existe
-    TreeMap *auxMap = map;
-    Homework *auxTask = (Homework*) firstTreeMap(auxMap);
+    if(is_in_tree(map, task_name) == 1 && is_in_tree(map, precedence) == 1)
+    {   
+        Homework *auxTask = (Homework*) firstTreeMap(map);
 
+        while(auxTask != NULL)
+        {
+            if(strcmp(auxTask->hw_name, task_name) == 0)
+            {
+                pushBack(auxTask->precedence_list, precedence);
+                printf("La tarea %s fue precedida en la tarea %s exitosamente.\n\n", precedence, task_name);
+                return;
+            }
+            auxTask = (Homework*) nextTreeMap(map);
+        }
+    }
+    else
+    {
+        printf("la tarea o la tarea a preceder no existe, intentelo de nuevo:\n");
+    }
 }
 
 

@@ -69,7 +69,7 @@ int main()
                 
                 enter_value(precedence, "Por favor ingrese el nombre de la tarea a preceder:");
                 
-                establish_preference(homeworks, name), precedence;
+                establish_precedence(homeworks, name, precedence);
                 break;
             case 3:
                 //calls show_to_do()
