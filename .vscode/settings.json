@@ -1,6 +1,7 @@
 {
     "files.associations": {
         "treemap.h": "c",
-        "list.h": "c"
+        "list.h": "c",
+        "stdbool.h": "c"
     }
 }
