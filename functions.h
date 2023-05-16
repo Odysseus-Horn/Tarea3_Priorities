@@ -18,4 +18,6 @@ void add_task(TreeMap* map, char *task_name, char* priority);
 
 void establish_precedence(TreeMap* map, char *task_name, char* precedence_name);
 
+void show_to_do(TreeMap *map);
+
 #endif

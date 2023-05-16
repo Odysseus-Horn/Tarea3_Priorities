@@ -27,6 +27,4 @@ void * firstTreeMap(TreeMap * tree);
 
 void * nextTreeMap(TreeMap * tree);
 
-
-
 #endif /* TREEMAP_h */
