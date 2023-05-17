@@ -72,7 +72,9 @@ int main()
                 establish_precedence(homeworks, name, precedence);
                 break;
             case 3:
-                //calls show_to_do()
+                show_to_do(homeworks);
+
+                system("pause");
                 break;
             case 4:
                 //calls mark_as_done()
