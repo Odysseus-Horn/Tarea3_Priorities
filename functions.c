@@ -103,6 +103,7 @@ void establish_precedence(TreeMap* map, char *task_name, char* precedence)
         printf("la tarea o la tarea a preceder no existe, intentelo de nuevo:\n");
         system("pause");
     }
+    
 }
 
 void show_element(Homework* task)
@@ -135,6 +136,21 @@ int is_in_list(List *list, Homework *task)
     return 0;
 }
 
+void show_list_precedence(List *list)
+{
+    Homework* current = (Homework*) firstList(list);
+
+    printf("[");
+    while(current != NULL)
+    {
+        printf(" %s", current->hw_name);
+        
+        current = (Homework*) nextList(list);
+    }
+    puts("]");
+}
+
+
 List *create_task_list(TreeMap * map)
 {   
     
@@ -142,17 +158,9 @@ List *create_task_list(TreeMap * map)
 
     List *tasks_list = createList(); //lista de las tareas ordenadas
 
-
-    puts("ENTRE A create_task_list");
-    system("pause");
-
-    int cont = 1;
-
-    while (AuxTask != NULL) //bucle para recorrer tareas
+    while (AuxTask != NULL) //bucle para recorrer tareas //a1
     {
-        printf("LOOP %d", cont);
-        system("pause");
-        cont++;
+        
 
         Homework* current_precedence = (Homework*) firstList(AuxTask->precedence_list);
 
@@ -164,20 +172,7 @@ List *create_task_list(TreeMap * map)
 
             if(is_in_list(tasks_list, AuxTask) == 0) // si aun no ha entrado en la lista a imprimir, se inserta (en caso de que no se cumpla la condicion)
             {   
-                puts("PROBANDO");
-                system("pause");
-
-
                 pushBack(tasks_list, AuxTask);
-                puts("inserte aparentemente");
-
-                
-                Homework *prueba = (Homework*) lastList(tasks_list);
-
-                printf("PROBANDO DESPUES DE INSERTAR, TAREA: %s\n", prueba->hw_name);
-                system("pause");
-
-            
             }
 
         }
@@ -189,9 +184,14 @@ List *create_task_list(TreeMap * map)
                 if(is_in_list(tasks_list, current_precedence) == 0) // si no ha entrado en la lista se inserta.
                 {   
                     
-                    pushBack(tasks_list, AuxTask);
+                    pushBack(tasks_list, current_precedence);
                 }
                 current_precedence = (Homework*) nextList(AuxTask->precedence_list);
+            }
+
+            if(is_in_list(tasks_list, AuxTask) == 0) // si aun no ha entrado en la lista a imprimir, se inserta (en caso de que no se cumpla la condicion)
+            {   
+                pushBack(tasks_list, AuxTask);
             }
             
 
@@ -231,40 +231,33 @@ void show_to_do(TreeMap *map)
     }
 
     
-    //el problema deberia estar aqui
+    
     List *full_list = create_task_list(map);
     
-
-
-    //APARENTEMENTE LA LISTA NO SE LLENA BIEN. CRASHEA CUANDO IMPRIMO UN DATO DE LA LISTA
+    /*printf("PROBANDO DESPUES DE MOSTRAR PRIORIDADES");
+    show_list(full_list);
+    system("pause");
+    */
 
     Homework* current_list = (Homework *) firstList(full_list);
     
 
     while(current_list != NULL)
     {   
-        puts("entra aqui");
-        system("pause");
 
-        printf("Nombre: %s (Prioridad: %s) "), current_list->hw_name, current_list->priority;
+        printf("Nombre: %s (Prioridad: %s) ", current_list->hw_name, current_list->priority);
 
-        if(current_list->precedence_list != NULL)
-        {
+        if(firstList(current_list->precedence_list) != NULL)
+        {   
+
             printf("Precedente: ");
-            
-            Homework* current_precedence = (Homework*) firstList(current_list->precedence_list);
-
-            while(current_precedence != NULL)
-            {
-                printf("%d ", current_precedence->hw_name);
-
-                current_precedence = (Homework*) nextList(current_list->precedence_list);
-            }
+            show_list_precedence(current_list->precedence_list);
         }
         puts("");
-
+        current_list = nextList(full_list);
     }
-    
+    system("pause");
+    system("cls");
 }
 
 

@@ -27,6 +27,7 @@ void enter_value(char *value, char* text_to_show)
     while(getchar() != '\n');
 }
 
+
 int main()
 {   
 
@@ -70,8 +71,11 @@ int main()
                 enter_value(precedence, "Por favor ingrese el nombre de la tarea a preceder:");
                 
                 establish_precedence(homeworks, name, precedence);
+
+                system("cls");
                 break;
             case 3:
+                system("cls");
                 show_to_do(homeworks);
 
                 system("pause");
@@ -88,7 +92,13 @@ int main()
                 return 0;
                 break;
             default:
-                printf("Opcion no valida, por favor intente nuevamente");
+                system("cls");
+
+                puts("Opcion no valida, por favor intente nuevamente");
+                system("pause");
+
+                system("cls");
+
                 break;
         }
 
