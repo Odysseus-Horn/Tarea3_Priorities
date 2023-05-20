@@ -35,6 +35,7 @@ int main()
 
     while(1)
     {  
+        system("cls");
         show_menu();
         int choice;
         scanf("%d", &choice);
@@ -46,7 +47,6 @@ int main()
         char priority[MAXCHAR];
         char precedence[MAXCHAR];
 
-        
         switch (choice)
         {
             case 1:
@@ -58,30 +58,32 @@ int main()
                 enter_value(priority, "Ingrese la prioridad que le quiere asignar:");
 
                 add_task(homeworks, name, priority);
-
-                puts("task added succesfully");
-
-
+                
                 system("pause");
-                system("cls");
                 break;
             case 2:
+                system("cls");
                 enter_value(name, "Ingrese el nombre de la tarea:");
                 
                 enter_value(precedence, "Por favor ingrese el nombre de la tarea a preceder:");
                 
                 establish_precedence(homeworks, name, precedence);
 
-                system("cls");
                 break;
             case 3:
                 system("cls");
                 show_to_do(homeworks);
 
-                system("pause");
+                
                 break;
             case 4:
-                //calls mark_as_done()
+                system("cls");
+
+                enter_value(name, "Ingrese el nombre de la tarea a marcar");
+
+                mark_as_done(homeworks, name);
+
+
                 break;
             
             case 5:
@@ -96,8 +98,6 @@ int main()
 
                 puts("Opcion no valida, por favor intente nuevamente");
                 system("pause");
-
-                system("cls");
 
                 break;
         }

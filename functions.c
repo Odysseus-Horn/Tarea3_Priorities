@@ -59,6 +59,11 @@ void add_task(TreeMap* map, char *task_name, char* priority)
     
     insertTreeMap(map, new_task->priority, new_task);
 
+    system("cls");
+    puts("========================================");
+    puts("Tarea agregada exitosamente");
+    puts("========================================");
+
     return;
 }
 
@@ -147,7 +152,7 @@ void show_list_precedence(List *list)
         
         current = (Homework*) nextList(list);
     }
-    puts("]");
+    printf("]");
 }
 
 
@@ -241,12 +246,19 @@ void show_to_do(TreeMap *map)
 
     Homework* current_list = (Homework *) firstList(full_list);
     
+    puts("=========================================================");
+    puts("Tareas por hacer ordenadas por prioridad y precedencia");
+    puts("=========================================================");
+    puts("");
+
+    int cont = 1;
 
     while(current_list != NULL)
     {   
 
-        printf("Nombre: %s (Prioridad: %s) ", current_list->hw_name, current_list->priority);
-
+        printf("%d.- Nombre: %s (Prioridad: %s) ",cont, current_list->hw_name, current_list->priority);
+        cont++;
+        
         if(firstList(current_list->precedence_list) != NULL)
         {   
 
@@ -256,10 +268,50 @@ void show_to_do(TreeMap *map)
         puts("");
         current_list = nextList(full_list);
     }
+    puts("");
+    puts("=========================================================");
+
     system("pause");
     system("cls");
 }
 
+void mark_as_done(TreeMap *map, char* task_name)
+{
+    if(is_in_tree(map, task_name) == 0)
+    {
+        puts("La tarea no existe en la lista o ya fue completada, por favor intentelo de nuevo\n");
+        system("pause");
+        return;
+    }   
+
+    Homework* aux_task = firstTreeMap(map);
+
+    while(aux_task != NULL)
+    {   
+        Homework* current_precedence = firstList(aux_task->precedence_list);
+        if(firstList(aux_task->precedence_list) != NULL)
+        {   
+            while(current_precedence != NULL)
+            {
+                if(strcmp(current_precedence->hw_name,task_name) == 0)
+                {
+                    popCurrent(aux_task->precedence_list);
+                }
+                current_precedence = nextList(aux_task->precedence_list);
+            }
+        }
+
+        aux_task = nextTreeMap(map);
+    }
+
+    findTask(map, task_name);
+
+    eraseTreeMap(map);
+
+    puts("La tarea ha sido marcada como completada exitosamente");
+
+    system("pause");
+}
 
 
 
